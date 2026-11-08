@@ -15,6 +15,7 @@ public class Product {
     private String name;
     private String description;
     private String imageUrl;
+    private int stockQuantity;
 
     protected Product() {
     }
@@ -23,6 +24,11 @@ public class Product {
         this.name = name;
         this.description = description;
         this.imageUrl = imageUrl;
+    }
+
+    public Product(String name, String description, String imageUrl, int stockQuantity) {
+        this(name, description, imageUrl);
+        this.stockQuantity = stockQuantity;
     }
 
     public Long getId() {
@@ -51,5 +57,16 @@ public class Product {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public int getStockQuantity() {
+        return stockQuantity;
+    }
+
+    public void decreaseStock(int quantity) {
+        if (quantity > stockQuantity) {
+            throw new IllegalArgumentException("Insufficient product stock");
+        }
+        stockQuantity -= quantity;
     }
 }
